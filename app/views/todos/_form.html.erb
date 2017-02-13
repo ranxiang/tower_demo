@@ -1,0 +1,18 @@
+<%= simple_form_for(@todo) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.input :deleted %>
+    <%= f.input :finished %>
+    <%= f.input :finished_at %>
+    <%= f.association :project %>
+    <%= f.association :creator %>
+    <%= f.association :assignee %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
