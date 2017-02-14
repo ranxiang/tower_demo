@@ -1,25 +1,7 @@
 <h1>Events</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Event User</th>
-      <th>Event Time</th>
-      <th>Event Project</th>
-      <th>Event Type</th>
-      <th>Event Data</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.user.name %></td>
-        <td><%= event.created_at %></td>
-        <td><%= event.project.name %></td>
-        <td><%= event.event_type %></td>
-        <td><%= event.ext_data %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="events">
+  <% @events.each do |event| %>
+  <%= render partial: event.event_type, locals: {event: event}%>
+  <br>
+  <% end %>
+</div>
