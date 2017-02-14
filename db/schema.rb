@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213174400) do
+ActiveRecord::Schema.define(version: 20170214043317) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",    limit: 65535
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 20170213174400) do
     t.datetime "updated_at",               null: false
     t.index ["todo_id"], name: "index_comments_on_todo_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "event_type"
+    t.text     "ext_data",   limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["project_id"], name: "index_events_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -62,6 +73,8 @@ ActiveRecord::Schema.define(version: 20170213174400) do
 
   add_foreign_key "comments", "todos"
   add_foreign_key "comments", "users"
+  add_foreign_key "events", "projects"
+  add_foreign_key "events", "users"
   add_foreign_key "projects", "teams"
   add_foreign_key "todos", "projects"
   add_foreign_key "todos", "users", column: "assignee_id"
