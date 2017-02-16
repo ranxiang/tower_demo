@@ -9,6 +9,7 @@ class Event < ApplicationRecord
                      comment_create: 6}
   serialize :ext_data, Hash
 
+  # TODO we might need consider the access permission between user and project here
   after_create_commit { EventBroadcastJob.perform_later self }
 
   def self.create_by_event_type_and_obj!(event_type, obj)
