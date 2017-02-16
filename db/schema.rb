@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214043317) do
+ActiveRecord::Schema.define(version: 20170216024338) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",    limit: 65535
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20170214043317) do
     t.index ["project_id"], name: "index_todos_on_project_id", using: :btree
   end
 
+  create_table "user_project_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_user_project_assignments_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_user_project_assignments_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "team_id"
@@ -79,5 +88,7 @@ ActiveRecord::Schema.define(version: 20170214043317) do
   add_foreign_key "todos", "projects"
   add_foreign_key "todos", "users", column: "assignee_id"
   add_foreign_key "todos", "users", column: "creator_id"
+  add_foreign_key "user_project_assignments", "projects"
+  add_foreign_key "user_project_assignments", "users"
   add_foreign_key "users", "teams"
 end
