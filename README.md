@@ -1,24 +1,30 @@
-# README
+### Requirements
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* ruby2.4 and bundler
+* mysql5.6
+* A Modern Web Browser which supported WebSocket
 
-Things you may want to cover:
 
-* Ruby version
+### Setup
 
-* System dependencies
+1. clone the project by command:
+```shell
+\> git@github.com:ranxiang/tower_demo.git
+```
 
-* Configuration
+2. install necessary gems by command:
+```shell
+\> bundle
+```
 
-* Database creation
+2. setup database:
+```shell
+\> rake db:setup
+```
 
-* Database initialization
+3. start the web server by command:
+```shell
+\> rails s
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+4. visit http://localhost:3000 by web browser.
